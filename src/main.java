@@ -16,7 +16,7 @@ public class main {
 	static int num_days;
 
 	static int [] books_scores;
-	static HashMap<Integer, Library> libraries = new HashMap<String, String>();
+	static HashMap<Integer, Library> libraries = new HashMap<Integer, Library>();
 
 
 	public static void main(String[] args) throws IOException {
@@ -28,6 +28,7 @@ public class main {
 		System.out.println();
 		for(int i =0; i<books_scores.length; i++)	
 			System.out.println(books_scores[i]);
+		
 	}
 
 
@@ -68,11 +69,13 @@ public class main {
 
 					int in0 = Integer.parseInt(values[0]) ;
 					int in1 = Integer.parseInt(values[1]);
-					int in2 =  Integer.parseInt(values[3]);
+					int in2 = Integer.parseInt(values[2]);
 					ArrayList<Integer> in3 = new ArrayList<Integer>();
 					for(int j = 0 ; j < values2.length; j++)
 						in3.add(Integer.parseInt(values2[j]));
-					libraries.put(hashvalues++, new Library(in0,in1,in2,in3));
+					Library l = new Library(hashvalues,in0,in1,in2,in3);
+					libraries.put(hashvalues++, l);
+					System.out.println();
 					
 
 				}
