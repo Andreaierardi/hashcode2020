@@ -1,8 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,6 +16,7 @@ public class main {
 
 	static List<Integer> libOrder = new ArrayList<>();
 	static List<Integer> bookSent = new ArrayList<>();
+	static BufferedWriter bw;
 
 
 
@@ -55,6 +52,8 @@ public class main {
 			}
 		}
 	}
+
+
 
 
 
@@ -136,7 +135,16 @@ public class main {
 
 			/*ciclo tutti i libri della libri che possiamo mandare */
 			/* i dev'essere minore del numero massimo dei libri che fdacenbdo signup possiamo mandare */
-			for (int i=0; i<(dayTot - (library.getDaysSignUp() + startDay)) * library.getbPerDay(); i++)
+			int x;
+			if(library.getnBooks() < (dayTot - (library.getDaysSignUp() + startDay)) * library.getbPerDay())
+			{
+				x = library.getnBooks();
+			}
+			else
+			{
+				x = (dayTot - (library.getDaysSignUp() + startDay)) * library.getbPerDay();
+			}
+			for (int i=0; i<x; i++)
 			{
 				/*totale score */
 				scoreTotale += books_scores[all_books_ids_of_library.get(i)];
