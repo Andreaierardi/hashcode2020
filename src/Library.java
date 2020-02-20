@@ -15,13 +15,13 @@ public class Library
         this.bookIDs = bookIDs;
     }
 
-    public void sort(HashMap<Integer, Integer> hash)
+    public void sort(int[] hash)
     {
         bookIDs.sort(new Comparator<Integer>() {
             @Override
             public int compare(Integer t1, Integer t2) {
                 int result;
-                result = hash.get(t2) - hash.get(t1);
+                result = hash[t2] - hash[t1];
                 return result;
             }
         });

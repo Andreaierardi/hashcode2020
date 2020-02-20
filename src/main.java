@@ -28,7 +28,7 @@ public class main {
 		System.out.println();
 		for(int i =0; i<books_scores.length; i++)	
 			System.out.println(books_scores[i]);
-		
+
 	}
 
 
@@ -75,9 +75,7 @@ public class main {
 						in3.add(Integer.parseInt(values2[j]));
 					Library l = new Library(hashvalues,in0,in1,in2,in3);
 					libraries.put(hashvalues++, l);
-					System.out.println();
-					
-
+					l.sort(books_scores);
 				}
 				count++;
 				sb.append("\n");     //line feed   
