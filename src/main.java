@@ -51,6 +51,36 @@ public class main {
 				libraries.remove(l2);
 			}
 		}
+		
+		File file = new File("output.txt");
+		FileWriter fr = new FileWriter(file, true);
+		BufferedWriter br = new BufferedWriter(fr);
+		PrintWriter pr = new PrintWriter(br);
+		
+		pr.println(libOrder.size());
+		
+		int cicle = libOrder.size()-1;
+		System.out.println("SIZE "+libOrder.get(1));
+
+		for (int i = 0 ; i<cicle; i++)
+		{
+			Library lib = libraries.get(libOrder.get(0));
+			String s = lib.id + " "+lib.passedBooks;
+			pr.println(s);
+			
+			String tmp = new String();
+			for (int prova : lib.bookIDs)
+				tmp += prova+" ";
+			pr.println(tmp);
+
+		}
+		
+		
+		pr.close();
+		br.close();
+		fr.close();
+
+	
 	}
 
 
@@ -123,8 +153,7 @@ public class main {
 		Library bestL = all_library.get(0);
 		int bestScore = 0;
 		int scoreTotale = 0;
-
-
+		
 		for (Library library : all_library)
 		{
 			library.deleteBooks(toRemove);
@@ -132,6 +161,8 @@ public class main {
 
 			/* prende  tutti gli id dei libri della libreria che si suppone che abbiamo gia ordinato */
 			List<Integer> all_books_ids_of_library = library.getBookIDs();
+
+			System.out.println("W EWRWR "+ library.toString());
 
 			/*ciclo tutti i libri della libri che possiamo mandare */
 			/* i dev'essere minore del numero massimo dei libri che fdacenbdo signup possiamo mandare */
@@ -147,6 +178,7 @@ public class main {
 			for (int i=0; i<x; i++)
 			{
 				/*totale score */
+				System.out.println("ULTIMO "+i);
 				scoreTotale += books_scores[all_books_ids_of_library.get(i)];
 			}
 

@@ -16,6 +16,7 @@ public class Library
         this.bookIDs = bookIDs;
     }
 
+    
     public void sort(int[] hash)
     {
         bookIDs.sort(new Comparator<Integer>() {
@@ -31,6 +32,7 @@ public class Library
     public void deleteBooks(List<Integer> books)
     {
         bookIDs.removeAll(books);
+       nBooks = bookIDs.size();
     }
 
     public int getnBooks() {
