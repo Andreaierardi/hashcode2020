@@ -18,9 +18,14 @@ public class main {
 	static int [] books_scores;
 	static HashMap<Integer, Library> libraries = new HashMap<Integer, Library>();
 
+	static List<Integer> libOrder = new ArrayList<>();
+	static List<Integer> bookSent = new ArrayList<>();
+
+
 
 	public static void main(String[] args) throws IOException {
 
+		int firstAvailableDay=1;
 		leggifile("a_example.txt");
 		System.out.println(num_book);
 		System.err.println(num_lib);
@@ -29,7 +34,31 @@ public class main {
 		for(int i =0; i<books_scores.length; i++)	
 			System.out.println(books_scores[i]);
 
+		Library l = libraries.get(0);
+		List<Integer> u = l.getBookIDs();
+		/*System.out.println("\n");
+		for (Integer i: u
+			 ) {
+			System.out.println(i);
+		}*/
+
+		Library l2;
+		for(int i=1; i<=num_days; i++)
+		{
+			if(i>= firstAvailableDay)
+			{
+				l2 = main.bestLibrary(num_days, i, new ArrayList<>(libraries.values()), bookSent);
+				firstAvailableDay += l2.getDaysSignUp();
+				libOrder.add(l2.getId());
+				bookSent.addAll(l2.getBookIDs());
+				libraries.remove(l2);
+			}
+		}
 	}
+
+
+
+
 
 
 	public static void leggifile(String inputfile) throws FileNotFoundException
@@ -88,7 +117,40 @@ public class main {
 		{  
 			e.printStackTrace();  
 		}  
-	}  
+	}
+
+	private static Library bestLibrary(int dayTot, int startDay, List<Library> all_library, List<Integer> toRemove)
+	{
+		Library bestL = all_library.get(0);
+		int bestScore = 0;
+		int scoreTotale = 0;
+
+
+		for (Library library : all_library)
+		{
+			library.deleteBooks(toRemove);
+			scoreTotale = 0;
+
+			/* prende  tutti gli id dei libri della libreria che si suppone che abbiamo gia ordinato */
+			List<Integer> all_books_ids_of_library = library.getBookIDs();
+
+			/*ciclo tutti i libri della libri che possiamo mandare */
+			/* i dev'essere minore del numero massimo dei libri che fdacenbdo signup possiamo mandare */
+			for (int i=0; i<(dayTot - (library.getDaysSignUp() + startDay)) * library.getbPerDay(); i++)
+			{
+				/*totale score */
+				scoreTotale += books_scores[all_books_ids_of_library.get(i)];
+			}
+
+			if(scoreTotale > bestScore)
+			{
+				bestScore=scoreTotale;
+				library.setPassedBooks((dayTot - (library.getDaysSignUp() + startDay)) * library.getbPerDay());
+				bestL = library;
+			}
+		}
+		return bestL;
+	}
 
 }
 

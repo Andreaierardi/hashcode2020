@@ -4,11 +4,12 @@ import java.util.List;
 
 public class Library
 {
-    int  nBooks, daysSignUp, bPerDay,passedBooks;
+    int  id,nBooks, daysSignUp, bPerDay,passedBooks;
     List<Integer> bookIDs;
 
 
-    public Library(int id, int nBooks, int daysSignup, int bPerDay, List<Integer> bookIDs) {
+    public Library(int id, int nBooks, int daysSignUp, int bPerDay, List<Integer> bookIDs) {
+        this.id = id;
         this.nBooks = nBooks;
         this.daysSignUp = daysSignUp;
         this.bPerDay = bPerDay;
@@ -50,5 +51,13 @@ public class Library
 
     public void setPassedBooks(int passedBooks) {
         this.passedBooks = passedBooks;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getPassedBooks() {
+        return passedBooks;
     }
 }
