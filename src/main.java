@@ -16,6 +16,9 @@ public class main {
 
 	static List<Integer> libOrder = new ArrayList<>();
 	static List<Integer> bookSent = new ArrayList<>();
+	
+	static ArrayList<Library> libSol = new ArrayList<>();
+
 	static BufferedWriter bw;
 
 
@@ -23,7 +26,7 @@ public class main {
 	public static void main(String[] args) throws IOException {
 
 		int firstAvailableDay=1;
-		leggifile("a_example.txt");
+		leggifile("b_read_on.txt");
 		System.out.println(num_book);
 		System.err.println(num_lib);
 		System.out.println(num_days);
@@ -33,6 +36,9 @@ public class main {
 
 		Library l = libraries.get(0);
 		List<Integer> u = l.getBookIDs();
+		System.out.println("======");
+
+		System.out.println(u);
 		/*System.out.println("\n");
 		for (Integer i: u
 			 ) {
@@ -42,29 +48,48 @@ public class main {
 		Library l2;
 		for(int i=1; i<=num_days; i++)
 		{
-			if(i>= firstAvailableDay)
+			System.out.println("\n\n");
+
+			System.out.println("We are in day "+i+"  ...");
+
+			if(i>= firstAvailableDay && !libraries.isEmpty())
 			{
+				System.out.println("available!");
+
 				l2 = main.bestLibrary(num_days, i, new ArrayList<>(libraries.values()), bookSent);
+				System.out.println("________________");
+
+				System.out.println("BEST");
+				System.out.println(l2.toString());
+				System.out.println("________________");
 				firstAvailableDay += l2.getDaysSignUp();
 				libOrder.add(l2.getId());
 				bookSent.addAll(l2.getBookIDs());
-				libraries.remove(l2);
+				libSol.add(l2);
+				libraries.remove(l2.id);
+				System.out.println("-----\nSTATUS HASHMAP after removing:\n");
+				System.out.println(libraries.toString());
+				System.out.println("----------------------------------------");
 			}
 		}
 		
+		
+	//	System.out.println(libOrder.);
+		System.out.println("\n__________________\nFILE WRITING");
 		File file = new File("output.txt");
 		FileWriter fr = new FileWriter(file, true);
 		BufferedWriter br = new BufferedWriter(fr);
 		PrintWriter pr = new PrintWriter(br);
 		
-		pr.println(libOrder.size());
+		pr.println(libSol.size());
 		
-		int cicle = libOrder.size()-1;
-		System.out.println("SIZE "+libOrder.get(1));
+		int cicle = libSol.size();
 
 		for (int i = 0 ; i<cicle; i++)
 		{
-			Library lib = libraries.get(libOrder.get(0));
+			
+			System.out.println("=====\n Writing in file "+libSol.get(i));
+			Library lib = libSol.get(i);
 			String s = lib.id + " "+lib.passedBooks;
 			pr.println(s);
 			
@@ -114,7 +139,7 @@ public class main {
 				}
 				else if(count == 1)
 				{
-					String[] values = (line.split(" "));
+					String[] values = line.split(" ");
 					books_scores = new int[values.length];
 					for(int i =0; i<values.length; i++)
 						books_scores[i]=Integer.parseInt(values[i]);
@@ -123,6 +148,8 @@ public class main {
 				{
 					String[] values = line.split(" ");
 					line=br.readLine();
+					for(int j = 0 ; j < values.length; j++)
+						System.out.println(values[j]);
 					String[] values2 = line.split(" ");
 
 					int in0 = Integer.parseInt(values[0]) ;
@@ -150,7 +177,13 @@ public class main {
 
 	private static Library bestLibrary(int dayTot, int startDay, List<Library> all_library, List<Integer> toRemove)
 	{
-		Library bestL = all_library.get(0);
+		 Library bestL = null;
+		if(!all_library.isEmpty())
+			bestL = all_library.get(0);
+		
+		System.out.println("TOTAL this day");
+		for (int i = 0 ;  i < all_library.size() ; i++)
+			System.out.println(all_library.get(i).toString());
 		int bestScore = 0;
 		int scoreTotale = 0;
 		
@@ -162,30 +195,35 @@ public class main {
 			/* prende  tutti gli id dei libri della libreria che si suppone che abbiamo gia ordinato */
 			List<Integer> all_books_ids_of_library = library.getBookIDs();
 
-			System.out.println("W EWRWR "+ library.toString());
 
 			/*ciclo tutti i libri della libri che possiamo mandare */
 			/* i dev'essere minore del numero massimo dei libri che fdacenbdo signup possiamo mandare */
 			int x;
+			
+
 			if(library.getnBooks() < (dayTot - (library.getDaysSignUp() + startDay)) * library.getbPerDay())
 			{
 				x = library.getnBooks();
+				System.out.println("Books (ALL) that i'm going to scan "+ x);
+
 			}
 			else
 			{
 				x = (dayTot - (library.getDaysSignUp() + startDay)) * library.getbPerDay();
+				System.out.println("Books (NOT ALL) that i'm going to scan "+ x);
+
 			}
 			for (int i=0; i<x; i++)
 			{
 				/*totale score */
-				System.out.println("ULTIMO "+i);
+				System.out.println("Libro [Score:"+books_scores[all_books_ids_of_library.get(i)]+"; ID:"+ all_books_ids_of_library.get(i)+ " ]");
 				scoreTotale += books_scores[all_books_ids_of_library.get(i)];
 			}
 
 			if(scoreTotale > bestScore)
 			{
 				bestScore=scoreTotale;
-				library.setPassedBooks((dayTot - (library.getDaysSignUp() + startDay)) * library.getbPerDay());
+				library.setPassedBooks(x);
 				bestL = library;
 			}
 		}

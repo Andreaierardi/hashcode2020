@@ -16,14 +16,18 @@ public class Library
         this.bookIDs = bookIDs;
     }
 
-    
-    public void sort(int[] hash)
+    public String toString()
+    {
+    	String s = "[Lib id: "+id+", nbooks: "+nBooks+", day for Signup: "+daysSignUp+", book x Day: " +bPerDay+", bookIDs"+bookIDs+ " ]"; 
+    	return s;
+    }
+    public void sort(int[] vector)
     {
         bookIDs.sort(new Comparator<Integer>() {
             @Override
             public int compare(Integer t1, Integer t2) {
                 int result;
-                result = hash[t2] - hash[t1];
+                result = vector[t2] - vector[t1];
                 return result;
             }
         });
@@ -32,7 +36,7 @@ public class Library
     public void deleteBooks(List<Integer> books)
     {
         bookIDs.removeAll(books);
-       nBooks = bookIDs.size();
+        nBooks = bookIDs.size();
     }
 
     public int getnBooks() {
