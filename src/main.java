@@ -26,7 +26,7 @@ public class main {
 	public static void main(String[] args) throws IOException {
 
 		int firstAvailableDay=1;
-		leggifile("b_read_on.txt");
+		leggifile("a_example.txt");
 		System.out.println(num_book);
 		System.err.println(num_lib);
 		System.out.println(num_days);
