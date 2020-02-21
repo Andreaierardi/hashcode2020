@@ -42,7 +42,7 @@ public class main {
 		{
 			int firstAvailableDay=1;
 
-
+//ok
 			System.out.println("Reading file "+inputfiles.get(f));
 			filetext = leggifile2(inputfiles.get(f));
 			filetext = filetext.substring(4,filetext.length()-1);
