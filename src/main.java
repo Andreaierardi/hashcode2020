@@ -31,12 +31,12 @@ public class main {
 	//	inputfiles.add("a_example.txt");
 //		inputfiles.add("b_read_on.txt");
 	//	inputfiles.add("c_incunabula.txt");
-		inputfiles.add("d_tough_choices.txt");
-		inputfiles.add("e_so_many_books.txt");
+	//	inputfiles.add("e_so_many_books.txt");
 		inputfiles.add("f_libraries_of_the_world.txt");
+	//	inputfiles.add("d_tough_choices.txt");
 
-		outputfiles.add("e_output.txt");
 		outputfiles.add("f_output.txt");
+	//	outputfiles.add("d_output.txt");
 
 		for (int f = 0 ; f< inputfiles.size(); f++)
 		{
@@ -124,7 +124,7 @@ public class main {
 				FileWriter myWriter = new FileWriter(outputfiles.get(f));
 				myWriter.write(output);
 				myWriter.close();
-				System.out.println("Successfully wrote to the file.");
+				System.out.println("Successfully wrote to the file."+ outputfiles.get(f));
 			} catch (IOException e) {
 				System.out.println("An error occurred.");
 				e.printStackTrace();
