@@ -28,21 +28,24 @@ public class main {
 
 	public static void main(String[] args) throws IOException {
 
-	//	inputfiles.add("a_example.txt");
-//		inputfiles.add("b_read_on.txt");
-	//	inputfiles.add("c_incunabula.txt");
-	//	inputfiles.add("e_so_many_books.txt");
-	//	inputfiles.add("f_libraries_of_the_world.txt");
-	inputfiles.add("d_tough_choices.txt");
+		inputfiles.add("a_example.txt");
+		inputfiles.add("b_read_on.txt");
+		inputfiles.add("c_incunabula.txt");
+		inputfiles.add("d_tough_choices.txt");
+		inputfiles.add("e_so_many_books.txt");
+		inputfiles.add("f_libraries_of_the_world.txt");
 
-	//	outputfiles.add("f_output.txt");
-	outputfiles.add("d_output.txt");
+		outputfiles.add("a_output.txt");
+		outputfiles.add("b_output.txt");
+		outputfiles.add("c_output.txt");
+		outputfiles.add("d_output.txt");
+		outputfiles.add("e_output.txt");
+		outputfiles.add("f_output.txt");
 
 		for (int f = 0 ; f< inputfiles.size(); f++)
 		{
 			int firstAvailableDay=1;
 
-//ok
 			System.out.println("Reading file "+inputfiles.get(f));
 			filetext = leggifile2(inputfiles.get(f));
 			filetext = filetext.substring(4,filetext.length()-1);
