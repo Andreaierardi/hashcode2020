@@ -2,6 +2,6 @@
 
 # Group Elohim
 
-##Score
+## Score
 
 ![Scores](/score.JPG)
