@@ -31,12 +31,12 @@ public class main {
 	//	inputfiles.add("a_example.txt");
 //		inputfiles.add("b_read_on.txt");
 	//	inputfiles.add("c_incunabula.txt");
-	//	inputfiles.add("d_tough_choices.txt");
-		inputfiles.add("e_so_many_books.txt");
-		inputfiles.add("f_libraries_of_the_world.txt");
-
-		outputfiles.add("e_output.txt");
-		outputfiles.add("f_output.txt");
+		inputfiles.add("d_tough_choices.txt");
+		////	inputfiles.add("e_so_many_books.txt");
+		//	inputfiles.add("f_libraries_of_the_world.txt");
+		outputfiles.add("d_output.txt");
+		//	outputfiles.add("e_output.txt");
+		//	outputfiles.add("f_output.txt");
 
 		for (int f = 0 ; f< inputfiles.size(); f++)
 		{
